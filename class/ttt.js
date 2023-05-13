@@ -29,21 +29,32 @@ class TTT {
   }
 
   static checkWin(grid) {
-
-    // if (this.grid = [[' ',' ',' '],
-    //                   [' ',' ',' '],
-    //                   [' ',' ',' ']]) {
-    //     return false;
-       if (grid === [['X','X','X'],
-                                [' ',' ',' '],
-                                [' ',' ',' ']]) {
-          return 'X';
-        }
-
     // Return 'X' if player X wins
     // Return 'O' if player O wins
     // Return 'T' if the game is a tie
     // Return false if the game has not ended
+   // empty grid should return false
+
+    // Check for horizontal wins
+    for (let i = 0; i < grid.length; i++) {
+      let row = grid[i];
+      console.log(row);
+
+      if (row.every((el) => el === 'X')) {
+        return 'X';
+      } else if (row.every((el) => el === 'O')) {
+        return 'O';
+      }
+    }
+
+    if (this.grid = [[' ',' ',' '],
+                      [' ',' ',' '],
+                      [' ',' ',' ']]) {
+        return false;   
+    }
+
+
+
 
   }
 
@@ -61,9 +72,9 @@ class TTT {
 
 }
 
-// let grid = [[' ',' ',' '],
-//             [' ',' ',' '],
-//             [' ',' ',' ']]
-// console.log(TTT.checkWin(grid));
+let grid = [[' ',' ',' '],
+            ['O','O','O'],
+            [' ',' ',' ']]
+console.log(TTT.checkWin(grid));
 
 module.exports = TTT;
