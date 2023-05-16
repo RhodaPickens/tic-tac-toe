@@ -28,17 +28,28 @@ class TTT {
     console.log("TEST COMMAND");
   }
 
+  // Flip grid so vertical column becomes horizontal row
+  static flipGrid(grid) {
+    let newGrid = [];
+    for (const col in grid) { //iterate through column of grid
+      let flipped = grid.map(row => row[col]); // iterate through column element
+      newGrid.push(flipped);
+    }
+    return newGrid;
+  }
+
+
   static checkWin(grid) {
     // Return 'X' if player X wins
     // Return 'O' if player O wins
     // Return 'T' if the game is a tie
-    // Return false if the game has not ended
-   // empty grid should return false
+    // Return false if the game has not ended or it is empty
+
+    const flippedGrid = TTT.flipGrid(grid);
 
     // Check for horizontal wins
     for (let i = 0; i < grid.length; i++) {
       let row = grid[i];
-      console.log(row);
 
       if (row.every((el) => el === 'X')) {
         return 'X';
@@ -47,16 +58,49 @@ class TTT {
       }
     }
 
-    if (this.grid = [[' ',' ',' '],
-                      [' ',' ',' '],
-                      [' ',' ',' ']]) {
-        return false;   
+    // Check for vertical wins
+    for (let i = 0; i < flippedGrid.length; i++) {
+      let row = flippedGrid[i];
+
+      if (row.every((el) => el === 'X')) {
+        return 'X';
+      } else if (row.every((el) => el === 'O')) {
+        return 'O';
+      }
+    }
+
+    // Check for diagonal wins
+    // Check if all diagonal cells are the same, and not empty, then return the letter
+    if (
+      (grid[0][0] === grid[1][1]) &&
+      (grid[1][1] === grid[2][2]) &&
+      (grid[0][0] !== ' ' )) {
+      return grid[0][0];
+    } else if (
+      (grid[0][2] === grid[1][1]) &&
+      (grid[1][1] === grid[2][0]) &&
+      (grid[0][2] !== ' ')) {
+      return grid[0][2];
     }
 
 
+    // Recognizes ties
+    // check if grid full but no winner
+    // iterate through matrix, if no empty spaces then return 'T'
+    if (grid.every((row) => row.every((space) => space !== " "))) {
+      return 'T';
+    }
 
+
+    // return false if empty or game not ended
+    if (this.grid = [[' ',' ',' '],
+                      [' ',' ',' '],
+                      [' ',' ',' ']]) {
+        return false;
+    }
 
   }
+
 
   static endGame(winner) {
     if (winner === 'O' || winner === 'X') {
@@ -72,9 +116,31 @@ class TTT {
 
 }
 
-let grid = [[' ',' ',' '],
-            ['O','O','O'],
-            [' ',' ',' ']]
-console.log(TTT.checkWin(grid));
+// Examples
+// let grid = [[' ',' ',' '],
+//             ['O','O','O'],
+//             [' ',' ',' ']]
+// console.log(TTT.checkWin(grid));
+
+// grid = [['X',' ',' '],
+//         ['X',' ',' '],
+//         ['X',' ',' ']]
+// console.log(TTT.checkWin(grid));
+
+// grid = [['X','O','X'],
+//         ['X','O','O'],
+//         ['O','X','O']]
+// console.log(TTT.checkWin(grid)); // 'T'
+
+// grid = [['X',' ',' '],
+//         [' ','X',' '],
+//         [' ',' ','X']]
+// console.log(TTT.checkWin(grid)); // 'X'
+
+// grid = [[' ',' ','O'],
+//         [' ','O',' '],
+//         ['O',' ',' ']]
+
+// console.log(TTT.checkWin(grid)); //'O'
 
 module.exports = TTT;
