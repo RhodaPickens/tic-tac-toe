@@ -17,15 +17,38 @@ class TTT {
     Screen.initialize(3, 3);
     Screen.setGridlines(true);
 
-    // Replace this with real commands
-    Screen.addCommand('t', 'test command (remove)', TTT.testCommand);
+
+    //     The API is documented below. Try out the commands to see how they work.
+    // To process keypresses, you will need to load Command objects
+    // into the Screen API using Screen.addCommand.
+    // This function takes a key which triggers the command, a string description,
+    // and an action callback which is executed when key is pressed.
+
+    // Create commands for cursor movement in ttt.js
+    // that call cursor.up, cursor.down, cursor.left, and cursor.right
+
+    Screen.addCommand('up', 'move up', TTT.cursorUp);
+    Screen.addCommand('down', 'move down', TTT.cursorDown);
+    Screen.addCommand('left', 'move left', TTT.cursorLeft);
+    Screen.addCommand('right', 'move right', TTT.cursorRight);
 
     Screen.render();
   }
 
-  // Remove this
-  static testCommand() {
-    console.log("TEST COMMAND");
+  static cursorUp = () => {
+    console.log("testing cursor up");
+  }
+
+  static cursorDown = () => {
+    console.log("testing cursor down");
+  }
+
+  static cursorLeft = () => {
+    console.log("testing cursor left");
+  }
+
+  static cursorRight = () => {
+    console.log("testing cursor right");
   }
 
   // Flip grid so vertical column becomes horizontal row
@@ -37,7 +60,6 @@ class TTT {
     }
     return newGrid;
   }
-
 
   static checkWin(grid) {
     // Return 'X' if player X wins
@@ -83,14 +105,12 @@ class TTT {
       return grid[0][2];
     }
 
-
     // Recognizes ties
     // check if grid full but no winner
     // iterate through matrix, if no empty spaces then return 'T'
     if (grid.every((row) => row.every((space) => space !== " "))) {
       return 'T';
     }
-
 
     // return false if empty or game not ended
     if (this.grid = [[' ',' ',' '],

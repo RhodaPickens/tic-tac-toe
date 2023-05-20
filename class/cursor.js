@@ -22,7 +22,7 @@ class Cursor {
     Screen.setBackgroundColor(this.row, this.col, this.cursorColor);
   }
 
-  up() {
+  up = () => {
     if (this.row !== 0) {
       this.row -= 1;
     }
