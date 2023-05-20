@@ -17,38 +17,15 @@ class TTT {
     Screen.initialize(3, 3);
     Screen.setGridlines(true);
 
-
-    //     The API is documented below. Try out the commands to see how they work.
-    // To process keypresses, you will need to load Command objects
-    // into the Screen API using Screen.addCommand.
-    // This function takes a key which triggers the command, a string description,
-    // and an action callback which is executed when key is pressed.
-
     // Create commands for cursor movement in ttt.js
     // that call cursor.up, cursor.down, cursor.left, and cursor.right
 
-    Screen.addCommand('up', 'move up', TTT.cursorUp);
-    Screen.addCommand('down', 'move down', TTT.cursorDown);
-    Screen.addCommand('left', 'move left', TTT.cursorLeft);
-    Screen.addCommand('right', 'move right', TTT.cursorRight);
+    Screen.addCommand('up', 'move up', this.cursor.up.bind(this.cursor));
+    Screen.addCommand('down', 'move down', this.cursor.down.bind(this.cursor));
+    Screen.addCommand('left', 'move left', this.cursor.left.bind(this.cursor));
+    Screen.addCommand('right', 'move right', this.cursor.right.bind(this.cursor));
 
     Screen.render();
-  }
-
-  static cursorUp = () => {
-    console.log("testing cursor up");
-  }
-
-  static cursorDown = () => {
-    console.log("testing cursor down");
-  }
-
-  static cursorLeft = () => {
-    console.log("testing cursor left");
-  }
-
-  static cursorRight = () => {
-    console.log("testing cursor right");
   }
 
   // Flip grid so vertical column becomes horizontal row
