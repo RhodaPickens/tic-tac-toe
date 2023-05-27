@@ -24,8 +24,20 @@ class TTT {
     Screen.addCommand('down', 'move down', this.cursor.down.bind(this.cursor));
     Screen.addCommand('left', 'move left', this.cursor.left.bind(this.cursor));
     Screen.addCommand('right', 'move right', this.cursor.right.bind(this.cursor));
+    Screen.addCommand('return', 'place move', TTT.placeMove.bind(this));
 
     Screen.render();
+
+
+
+  }
+
+      // Create a command in ttt.js that places a move at the cursor's position
+      // if player is X place X, and O place O
+    // so conditional for player
+    // console.log to place move
+  static placeMove() {
+
   }
 
   // Flip grid so vertical column becomes horizontal row
